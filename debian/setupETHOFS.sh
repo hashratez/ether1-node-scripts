@@ -42,7 +42,7 @@ echo 'Installing Ether-1 Node binary'
 echo '**************************'
 # Download node binary
 
-wget https://files.ether1.org/releases/Ether1-MN-SN-0.0.9.1.tar.gz
+wget https://github.com/fallengravity/Ether-1-GN-Binaries/releases/download/0.0.9.1/Ether1-MN-SN-0.0.9.1.tar.gz
 
 tar -xzf Ether1-MN-SN-0.0.9.1.tar.gz
 
@@ -87,7 +87,7 @@ echo 'Masternode Setup Complete....Deploying IPFS'
 echo '**************************'
 
 cd $HOME
-wget https://files.ether1.org/releases/ipfs.tar.gz
+wget https://github.com/fallengravity/Ether-1-GN-Binaries/releases/download/0.0.9.1/ipfs.tar.gz
 tar -xzf ipfs.tar.gz
 chmod +x ipfs
 
@@ -159,7 +159,7 @@ echo '**************************'
 echo 'IPFS Setup Complete....Deploying ethoFS'
 echo '**************************'
 cd $HOME
-wget https://files.ether1.org/releases/ethoFS.tar.gz
+wget https://github.com/fallengravity/Ether-1-GN-Binaries/releases/download/0.0.9.1/ethoFS.tar.gz
 tar -xzf ethoFS.tar.gz
 chmod +x ethoFS
 
