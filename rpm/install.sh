@@ -15,7 +15,7 @@ sudo systemctl stop ether1node
 
 sudo rm geth
 
-wget https://files.ether1.org/releases/Ether1-MN-SN-0.0.9.1.tar.gz
+wget https://github.com/fallengravity/Ether-1-SN-MN-Binaries/releases/download/0.0.9.1/Ether1-MN-SN-0.0.9.1.tar.gz
 
 tar -xzf Ether1-MN-SN-0.0.9.1.tar.gz
 
