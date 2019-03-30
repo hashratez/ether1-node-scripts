@@ -50,8 +50,7 @@ EOL
         sudo \mv /tmp/ether1node.service /etc/systemd/system
         sudo \rm /usr/sbin/geth
         sudo \mv geth /usr/sbin/
-        sudo systemctl enable ether1node && systemctl stop ether1node && systemctl start ether1node
+        sudo systemctl enable ether1node && sudo systemctl stop ether1node && sudo systemctl start ether1node
         systemctl status ether1node --no-pager --full
 
 echo 'Done.'
-
