@@ -195,7 +195,7 @@ EOL
         sudo \mv /tmp/ethoFS.service /etc/systemd/system
         sudo \mv ethoFS /usr/sbin/
         sudo systemctl daemon-reload
-        sudo systemctl enable ethoFS && systemctl start ethoFS
+        sudo systemctl enable ethoFS && sudo systemctl start ethoFS
         sudo systemctl restart ethoFS
         sudo systemctl status ethoFS --no-pager --full
 echo '**************************'
