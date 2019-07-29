@@ -42,15 +42,15 @@ echo 'Installing Ether-1 Node binary'
 echo '**************************'
 # Download node binary
 
-wget https://github.com/Ether1Project/Ether-1-GN-Binaries/releases/download/0.0.9.1/Ether1-MN-SN-0.0.9.1.tar.gz
+wget https://github.com/Ether1Project/Ether-1-GN-Binaries/releases/download/1.2.1/Ether1-MN-SN-1.2.1.tar.gz
 
-tar -xzf Ether1-MN-SN-0.0.9.1.tar.gz
+tar -xzf Ether1-MN-SN-1.2.1.tar.gz
 
 # Make node executable
 chmod +x geth
 
 # Remove and cleanup
-rm Ether1-MN-SN-0.0.9.1.tar.gz
+rm Ether1-MN-SN-1.2.1.tar.gz
 
 echo '**************************'
 echo 'Creating and setting up Masternode/Service Node system service'
@@ -87,7 +87,7 @@ echo 'Masternode Setup Complete....Deploying IPFS'
 echo '**************************'
 
 cd $HOME
-wget https://github.com/Ether1Project/Ether-1-GN-Binaries/releases/download/0.0.9.1/ipfs.tar.gz
+wget https://github.com/Ether1Project/Ether-1-GN-Binaries/releases/download/1.2.1/ipfs.tar.gz
 tar -xzf ipfs.tar.gz
 chmod +x ipfs
 
@@ -162,7 +162,7 @@ echo '**************************'
 echo 'IPFS Setup Complete....Deploying ethoFS'
 echo '**************************'
 cd $HOME
-wget https://github.com/Ether1Project/Ether-1-GN-Binaries/releases/download/0.0.9.1/ethoFS.tar.gz
+wget https://github.com/Ether1Project/Ether-1-GN-Binaries/releases/download/1.2.1/ethoFS.tar.gz
 tar -xzf ethoFS.tar.gz
 chmod +x ethoFS
 
