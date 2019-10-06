@@ -2,7 +2,7 @@
 
 #### Servicenode running Ubuntu / Debian
 
-```
+```bash
 apt-get update
 
 apt-get upgrade -y
@@ -28,7 +28,7 @@ sudo systemctl restart ether1node
 
 #### Servicenode running CentOS / Fedora / Redhat
 
-```
+```bash
 yum update -y
 
 yum install wget systemd epel-release -y
@@ -49,7 +49,7 @@ sudo systemctl restart ether1node
 ```
 #### Masternode running Ubuntu / Debian
 
-```
+```bash
 apt-get update
 
 apt-get upgrade -y
@@ -75,7 +75,7 @@ sudo systemctl restart ether1node
 
 #### Masternode running CentOS / Fedora / Redhat
 
-```
+```bash
 yum update -y
 
 yum install wget systemd epel-release -y
