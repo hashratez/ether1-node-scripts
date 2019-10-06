@@ -1,44 +1,23 @@
 #!/usr/bin/env sh
-_user=${SUDO_USER:-$(whoami)}
-_upgrade="No"
-_nodetype="masternode"
-
-for opt in "$@"
-do
-  if [ $opt = "-masternode" ] ; then
-    _nodetype="masternode"
-  elif [ $opt = "-gatewaynode" ] ; then
-    _nodetype="gatewaynode"
-  elif [ $opt = "-upgrade" ] ; then
-    _upgrade="Yes"
-  else
-    echo "Invalid option: $opt"
-  fi
-done
-
-if [ $_nodetype = "gatewaynode" ] ; then
-  echo "ethoFS Gateway Node Setup Initiated"
-fi
-if [ $_nodetype = "masternode" ] ; then
-  echo "Ether-1 Masternode Setup Initiated"
-fi
-
-if [ $_upgrade = "Yes" ] ; then
-  echo "Upgrade Option Selected"
-fi
+_user="$(id -u -n)"
 
 echo '**************************'
 echo 'Installing misc dependencies'
 echo '**************************'
+
 # install dependencies
-sudo yum install unzip wget -y
+sudo apt-get update && sudo apt-get install systemd unzip wget -y
 
 echo '**************************'
 echo 'Installing Ether-1 Node binary'
 echo '**************************'
-# Download node binary
 
-wget https://github.com/Ether1Project/Ether-1-GN-Binaries/releases/download/1.2.1/Ether1-MN-SN-1.2.1.tar.gz
+# Download node binary
+sudo systemctl stop ether1node
+
+sudo rm geth
+
+wget https://github.com/Ether1Project/Ether-1-SN-MN-Binaries/releases/download/1.2.1/Ether1-MN-SN-1.2.1.tar.gz
 
 tar -xzf Ether1-MN-SN-1.2.1.tar.gz
 
@@ -49,12 +28,12 @@ chmod +x geth
 rm Ether1-MN-SN-1.2.1.tar.gz
 
 echo '**************************'
-echo 'Creating and setting up' $_nodetype 'Node system service'
+echo 'Creating and setting up system service'
 echo '**************************'
 
 cat > /tmp/ether1node.service << EOL
 [Unit]
-Description=Ether1 Gateway/Master Node
+Description=Ether1 Masternode/Service Node
 After=network.target
 
 [Service]
@@ -65,22 +44,20 @@ Group=$_user
 Type=simple
 Restart=always
 
-ExecStart=/usr/sbin/geth --syncmode=fast --cache=512 --datadir=/home/$_user/.ether1 --lightpeers 100 --lightserv 40
+ExecStart=/usr/sbin/geth --syncmode=fast --cache=512
 
 [Install]
 WantedBy=default.target
 EOL
 
-sudo systemctl stop ether1node
 sudo \mv /tmp/ether1node.service /etc/systemd/system
+sudo \rm /usr/sbin/geth
 sudo \mv geth /usr/sbin/
-sudo systemctl daemon-reload
-sudo systemctl enable ether1node && systemctl start ether1node
-sudo systemctl restart ether1node
-sudo systemctl status ether1node --no-pager --full
+sudo systemctl enable ether1node && sudo systemctl stop ether1node && sudo systemctl start ether1node
+systemctl status ether1node --no-pager --full
 
 echo '**************************'
-echo 'Node Setup Complete....Deploying IPFS'
+echo 'Servicenode Setup Complete....Deploying IPFS'
 echo '**************************'
 
 cd /home/$_user
@@ -107,7 +84,7 @@ Group=$_user
 Type=simple
 Restart=always
 
-ExecStart=/usr/sbin/ipfs daemon --migrate --enable-namesys-pubsub --enable-gc
+ExecStart=/usr/sbin/ipfs daemon --migrate --enable-namesys-pubsub --enable-gc --routing=dhtclient
 
 [Install]
 WantedBy=default.target
@@ -116,21 +93,12 @@ EOL
 sudo systemctl stop ipfs
 sudo \mv /tmp/ipfs.service /etc/systemd/system
 sudo \mv ipfs /usr/sbin/
-
-if [ $_upgrade = "No" ] ; then
-  sudo rm -r $HOME/.ipfs
-  sudo rm -r /home/$_user/.ipfs
-  ipfs init
-fi
 ipfs bootstrap rm --all
-if [ $_nodetype = "gatewaynode" ] ; then
-  _maxstorage="76GB"
-  sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/ipfs
-  ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/80
-fi
-if [ $_nodetype = "masternode" ] ; then
-  _maxstorage="36GB"
-fi
+sudo rm -r $HOME/.ipfs
+sudo rm -r /home/$_user/.ipfs
+ipfs init
+
+_maxstorage="16GB"
 
 ipfs config Datastore.StorageMax $_maxstorage
 ipfs config --json Swarm.ConnMgr.LowWater 400
@@ -161,7 +129,7 @@ echo '**************************'
 echo 'IPFS Setup Complete....Deploying ethoFS'
 echo '**************************'
 
-cd /home/$_user
+cd $HOME
 wget https://github.com/Ether1Project/Ether-1-GN-Binaries/releases/download/1.2.1/ethoFS.tar.gz
 tar -xzf ethoFS.tar.gz
 chmod +x ethoFS
@@ -185,7 +153,7 @@ Group=$_user
 Type=simple
 Restart=always
 
-ExecStart=/usr/sbin/ethoFS -$_nodetype
+ExecStart=/usr/sbin/ethoFS -servicenode
 
 [Install]
 WantedBy=default.target
@@ -202,3 +170,5 @@ sudo systemctl status ethoFS --no-pager --full
 echo '**************************'
 echo 'ethoFS Setup Complete'
 echo '**************************'
+
+echo 'Done.'
