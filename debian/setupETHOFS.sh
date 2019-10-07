@@ -30,7 +30,7 @@ echo '**************************'
 echo 'Installing misc dependencies'
 echo '**************************'
 # install dependencies
-sudo apt-get update && sudo apt-get install systemd unzip wget build-essential -y
+sudo apt-get update && sudo apt-get install systemd unzip wget -y
 
 echo '**************************'
 echo 'Installing Ether-1 Node binary'
