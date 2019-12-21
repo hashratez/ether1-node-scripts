@@ -1,8 +1,10 @@
 #!/bin/bash
 # This script will prepare your VPS for the installation of an ethoFS node
 # Note: This script does not install the ethoFS node. It run all the prelimiary commands to get the VPS ready.
+#       To execute you either need to log in as root or run by prepending the "sudo" command.
 #       You will then need to logoff as root and login as "ether1node" user and run the node installation script
 #       to complete the installation.
+# Example: sudo ./vpsprep.sh
 # Version VPSprep v1.0
 
 # Variables
