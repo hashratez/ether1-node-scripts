@@ -4,7 +4,7 @@
 #       To execute you either need to log in as root or run by prepending the "sudo" command.
 #       You will then need to logoff as root and login as "ether1node" user and run the node installation script
 #       to complete the installation.
-# Example: sudo ./vpsprep.sh
+# Example: sudo ./vpsprep-gn.sh
 # Version VPSprep v1.0
 
 # Variables
