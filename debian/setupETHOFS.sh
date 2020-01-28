@@ -30,7 +30,7 @@ echo '**************************'
 echo 'Installing misc dependencies'
 echo '**************************'
 # install dependencies
-sudo apt-get update && sudo apt-get install systemd unzip wget -y
+sudo apt-get update && sudo apt-get install systemd libcap2-bin unzip wget -y
 
 echo '**************************'
 echo 'Installing Ether-1 Node binary'
@@ -117,28 +117,28 @@ sudo \mv /tmp/ipfs.service /etc/systemd/system
 sudo \mv ipfs /usr/sbin/
 if [ $_upgrade = "No" ] ; then
   sudo rm -r $HOME/.ipfs
-  ipfs init
+  /usr/sbin/ipfs init
 fi
-ipfs bootstrap rm --all
+/usr/sbin/ipfs bootstrap rm --all
 if [ $_nodetype = "gatewaynode" ] ; then
   _maxstorage="76GB"
   sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/ipfs
-  ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/80
+  /usr/sbin/ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/80
 fi
 if [ $_nodetype = "masternode" ] ; then
   _maxstorage="36GB"
 fi
 
-ipfs config Datastore.StorageMax $_maxstorage
-ipfs config --json Swarm.ConnMgr.LowWater 400
-ipfs config --json Swarm.ConnMgr.HighWater 600
-ipfs bootstrap add /ip4/164.68.107.82/tcp/4001/ipfs/QmeG81bELkgLBZFYZc53ioxtvRS8iNVzPqxUBKSuah2rcQ
-ipfs bootstrap add /ip4/164.68.98.94/tcp/4001/ipfs/QmRYw68MzD4jPvner913mLWBdFfpPfNUx8SRFjiUCJNA4f
-ipfs bootstrap add /ip4/51.38.131.241/tcp/4001/ipfs/QmaGGSUqoFpv6wuqvNKNBsxDParVuGgV3n3iPs2eVWeSN4
-ipfs bootstrap add /ip4/164.68.108.54/tcp/4001/ipfs/QmRwQ49Zknc2dQbywrhT8ArMDS9JdmnEyGGy4mZ1wDkgaX
-ipfs bootstrap add /ip4/51.77.150.202/tcp/4001/ipfs/QmUEy4ScCYCgP6GRfVgrLDqXfLXnUUh4eKaS1fDgaCoGQJ
-ipfs bootstrap add /ip4/51.79.70.144/tcp/4001/ipfs/QmTcwcKqKcnt84wCecShm1zdz1KagfVtqopg1xKLiwVJst
-ipfs bootstrap add /ip4/142.44.246.43/tcp/4001/ipfs/QmPW8zExrEeno85Us3H1bk68rBo7N7WEhdpU9pC9wjQxgu
+/usr/sbin/ipfs config Datastore.StorageMax $_maxstorage
+/usr/sbin/ipfs config --json Swarm.ConnMgr.LowWater 400
+/usr/sbin/ipfs config --json Swarm.ConnMgr.HighWater 600
+/usr/sbin/ipfs bootstrap add /ip4/164.68.107.82/tcp/4001/ipfs/QmeG81bELkgLBZFYZc53ioxtvRS8iNVzPqxUBKSuah2rcQ
+/usr/sbin/ipfs bootstrap add /ip4/164.68.98.94/tcp/4001/ipfs/QmRYw68MzD4jPvner913mLWBdFfpPfNUx8SRFjiUCJNA4f
+/usr/sbin/ipfs bootstrap add /ip4/51.38.131.241/tcp/4001/ipfs/QmaGGSUqoFpv6wuqvNKNBsxDParVuGgV3n3iPs2eVWeSN4
+/usr/sbin/ipfs bootstrap add /ip4/164.68.108.54/tcp/4001/ipfs/QmRwQ49Zknc2dQbywrhT8ArMDS9JdmnEyGGy4mZ1wDkgaX
+/usr/sbin/ipfs bootstrap add /ip4/51.77.150.202/tcp/4001/ipfs/QmUEy4ScCYCgP6GRfVgrLDqXfLXnUUh4eKaS1fDgaCoGQJ
+/usr/sbin/ipfs bootstrap add /ip4/51.79.70.144/tcp/4001/ipfs/QmTcwcKqKcnt84wCecShm1zdz1KagfVtqopg1xKLiwVJst
+/usr/sbin/ipfs bootstrap add /ip4/142.44.246.43/tcp/4001/ipfs/QmPW8zExrEeno85Us3H1bk68rBo7N7WEhdpU9pC9wjQxgu
 sudo chown -R $_user:$_user $HOME/.ipfs
 
 cat > /tmp/swarm.key << EOL
@@ -147,7 +147,7 @@ cat > /tmp/swarm.key << EOL
 38307a74b2176d0054ffa2864e31ee22d0fc6c3266dd856f6d41bddf14e2ad63
 EOL
 
-sudo \mv /tmp/swarm.key $HOME/.ipfs
+sudo \mv /tmp/swarm.key $HOME/.ipfs/swarm.key
 sudo systemctl daemon-reload
 sudo systemctl enable ipfs && systemctl start ipfs
 sudo systemctl restart ipfs
