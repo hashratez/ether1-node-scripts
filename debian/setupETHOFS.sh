@@ -30,7 +30,7 @@ echo '**************************'
 echo 'Installing misc dependencies'
 echo '**************************'
 # install dependencies
-sudo apt-get update && sudo apt-get install systemd libcap2-bin unzip wget -y
+sudo apt-get update && sudo apt-get install systemd libcap2-bin policykit-1 unzip wget -y
 
 echo '**************************'
 echo 'Installing Ether-1 Node binary'
