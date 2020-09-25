@@ -97,7 +97,7 @@ if [ $_nodetype = "masternode" ] ; then
   /usr/sbin/geth ethofs=init
   cat > /tmp/ether1node.service << EOL
   [Unit]
-  Description=Ether1 Gateway Node
+  Description=Ether1 Masternode
   After=network.target
 
   [Service]
@@ -124,7 +124,7 @@ if [ $_nodetype = "servicenode" ] ; then
   /usr/sbin/geth ethofs=init
   cat > /tmp/ether1node.service << EOL
   [Unit]
-  Description=Ether1 Gateway Node
+  Description=Ether1 Service Node
   After=network.target
 
   [Service]
