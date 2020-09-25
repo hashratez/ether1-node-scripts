@@ -67,7 +67,7 @@ echo '**************************'
 
 if [ $_nodetype = "gatewaynode" ] ; then
   sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/geth
-  /usr/sbin/geth ethofs=init
+  /usr/sbin/geth --ethofs=gn --ethofsInit 
   cat > /tmp/ether1node.service << EOL
   [Unit]
   Description=Ether1 Gateway Node
@@ -81,7 +81,7 @@ if [ $_nodetype = "gatewaynode" ] ; then
   Type=simple
   Restart=always
 
-  ExecStart=/usr/sbin/geth --syncmode=fast --cache=512 --datadir=$HOME/.ether1 ethofs=gn
+  ExecStart=/usr/sbin/geth --syncmode=fast --cache=512 --datadir=$HOME/.ether1 --ethofs=gn
 
   [Install]
   WantedBy=default.target
@@ -94,7 +94,7 @@ EOL
 fi
 
 if [ $_nodetype = "masternode" ] ; then
-  /usr/sbin/geth ethofs=init
+  /usr/sbin/geth --ethofs=mn --ethofsInit
   cat > /tmp/ether1node.service << EOL
   [Unit]
   Description=Ether1 Masternode
@@ -108,7 +108,7 @@ if [ $_nodetype = "masternode" ] ; then
   Type=simple
   Restart=always
 
-  ExecStart=/usr/sbin/geth --syncmode=fast --cache=512 --datadir=$HOME/.ether1 ethofs=mn
+  ExecStart=/usr/sbin/geth --syncmode=fast --cache=512 --datadir=$HOME/.ether1 --ethofs=mn
 
   [Install]
   WantedBy=default.target
@@ -121,7 +121,7 @@ EOL
 fi
 
 if [ $_nodetype = "servicenode" ] ; then
-  /usr/sbin/geth ethofs=init
+  /usr/sbin/geth --ethofs=sn --ethofsInit
   cat > /tmp/ether1node.service << EOL
   [Unit]
   Description=Ether1 Service Node
@@ -135,7 +135,7 @@ if [ $_nodetype = "servicenode" ] ; then
   Type=simple
   Restart=always
 
-  ExecStart=/usr/sbin/geth --syncmode=fast --cache=512 --datadir=$HOME/.ether1 ethofs=sn
+  ExecStart=/usr/sbin/geth --syncmode=fast --cache=512 --datadir=$HOME/.ether1 --ethofs=sn
 
   [Install]
   WantedBy=default.target
