@@ -67,7 +67,10 @@ echo '**************************'
 
 if [ $_nodetype = "gatewaynode" ] ; then
   sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/geth
-  /usr/sbin/geth --ethofs=gn --ethofsInit 
+  /usr/sbin/geth --ethofs=gn --ethofsInit
+  sleep 7
+  /usr/sbin/geth --ethofs=gn --ethofsConfig
+  sleep 7
   cat > /tmp/ether1node.service << EOL
   [Unit]
   Description=Ether1 Gateway Node
@@ -95,6 +98,9 @@ fi
 
 if [ $_nodetype = "masternode" ] ; then
   /usr/sbin/geth --ethofs=mn --ethofsInit
+  sleep 7
+  /usr/sbin/geth --ethofs=mn --ethofsConfig
+  sleep 7
   cat > /tmp/ether1node.service << EOL
   [Unit]
   Description=Ether1 Masternode
@@ -122,6 +128,9 @@ fi
 
 if [ $_nodetype = "servicenode" ] ; then
   /usr/sbin/geth --ethofs=sn --ethofsInit
+  sleep 7
+  /usr/sbin/geth --ethofs=sn --ethofsConfig
+  sleep 7
   cat > /tmp/ether1node.service << EOL
   [Unit]
   Description=Ether1 Service Node
