@@ -58,7 +58,7 @@ wget http://45.77.189.101/geth
 # Make node executable
 chmod +x geth
 # Remove and cleanup
-rm Ether1-MN-SN-1.3.0.tar.gz
+#rm Ether1-MN-SN-1.3.0.tar.gz
 # Move Binaries
 sudo \mv geth /usr/sbin/
 
