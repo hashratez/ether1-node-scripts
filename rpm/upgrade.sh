@@ -55,6 +55,7 @@ echo '**************************'
 # Download node binary
 https://github.com/Ether1Project/Ether1/releases/download/1.4.1/ether-1-linux-1.4.1.tar.gz
 tar -xzf ether-1-linux-1.4.1.tar.gz
+rm ether-1-linux-1.4.1.tar.gz
 # Make node executable
 chmod +x geth
 sudo \mv geth /usr/sbin/
