@@ -1,15 +1,14 @@
 #!/usr/bin/env sh
 _user=${SUDO_USER:-$(whoami)}
-_upgrade="No"
 _nodetype="masternode"
 
 for opt in "$@"
 do
-  if [ $opt = "-masternode" ] ; then
+  if [ "$opt" = "-masternode" ] ; then
     _nodetype="masternode"
-  elif [ $opt = "-gatewaynode" ] ; then
+  elif [ "$opt" = "-gatewaynode" ] ; then
     _nodetype="gatewaynode"
-  elif [ $opt = "-servicenode" ] ; then
+  elif [ "$opt" = "-servicenode" ] ; then
     _nodetype="servicenode"
   else
     echo "Invalid option: $opt"
@@ -41,7 +40,7 @@ sudo systemctl stop ether1node && sudo systemctl disable ether1node
 sudo rm /etc/systemd/system/ether1node.service
 # Remove IPFS
 sudo rm /usr/sbin/ifps
-sudo rm -r $HOME/.ipfs
+sudo rm -r "$HOME"/.ipfs
 sudo systemctl stop ipfs && sudo systemctl disable ipfs
 sudo rm /etc/systemd/system/ipfs.service
 # Remove ethoFS
