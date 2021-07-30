@@ -48,13 +48,15 @@ sudo rm /usr/sbin/ethoFS
 sudo systemctl stop ethoFS && sudo systemctl disable ethoFS
 sudo rm /etc/systemd/system/ethoFS.service
 
+sudo rm $HOME/.ether1/ethofs/swarm.key
+
 echo '**************************'
 echo 'Installing Ether-1 Node binary'
 echo '**************************'
 # Download node binary
-https://github.com/Ether1Project/Ether1/releases/download/1.4.1/ether-1-linux-1.4.1.tar.gz
-tar -xzf ether-1-linux-1.4.1.tar.gz
-rm ether-1-linux-1.4.1.tar.gz
+https://github.com/Ether1Project/Ether1/releases/download/V1.5.0/etho-linux-1.5.0.tar.gz
+tar -xzf etho-linux-1.5.0.tar.gz
+rm etho-linux-1.5.0.tar.gz
 # Make node executable
 chmod +x geth
 sudo \mv geth /usr/sbin/
