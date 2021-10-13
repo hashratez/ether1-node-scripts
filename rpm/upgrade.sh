@@ -54,9 +54,9 @@ echo '**************************'
 echo 'Installing Ether-1 Node binary'
 echo '**************************'
 # Download node binary
-https://github.com/Ether1Project/Ether1/releases/download/V1.5.0/etho-linux-1.5.0.tar.gz
-tar -xzf etho-linux-1.5.0.tar.gz
-rm etho-linux-1.5.0.tar.gz
+https://github.com/Ether1Project/Ether1/releases/download/V1.5.1/etho-linux-1.5.1.tar.gz
+tar -xzf etho-linux-1.5.1.tar.gz
+rm etho-linux-1.5.1.tar.gz
 # Make node executable
 chmod +x geth
 sudo \mv geth /usr/sbin/
